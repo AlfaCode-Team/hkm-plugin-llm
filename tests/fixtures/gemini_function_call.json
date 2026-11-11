@@ -1,0 +1,1 @@
+{"candidates":[{"content":{"role":"model","parts":[{"text":"Checking."},{"functionCall":{"name":"get_invoice","args":{"id":"inv-7"}}},{"functionCall":{"name":"ping","args":{}}}]},"finishReason":"STOP"}],"usageMetadata":{"promptTokenCount":20,"candidatesTokenCount":9},"modelVersion":"gemini-test-2026"}

@@ -1,0 +1,1 @@
+{"id":"chatcmpl-3","model":"gpt-test-2026","choices":[{"index":0,"message":{"role":"assistant","content":null,"refusal":"I can't help with that."},"finish_reason":"stop"}],"usage":{"prompt_tokens":9,"completion_tokens":6}}

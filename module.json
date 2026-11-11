@@ -1,0 +1,146 @@
+{
+    "name": "llm",
+    "version": "0.1.0",
+    "kernel": "^1.19.0",
+    "solves": "llm.inference",
+    "type": "module",
+    "requires": [
+        "http.client"
+    ],
+    "exposes": [
+        "Plugins\\Llm\\API\\Contracts\\LlmContract"
+    ],
+    "routes": [],
+    "emits": [],
+    "listens": [],
+    "files": [],
+    "documentation": "Provider-neutral inference (Anthropic, OpenAI, Gemini, Ollama) over the kernel HttpClientPort: one model call, a tool loop in which the application authorizes every call the model chooses, and structured output that is validated locally whatever the provider did. No streaming: HttpClientPort returns whole responses, and a stream that buffers would be worse than none.",
+    "//api-keys-are-optional-on-purpose": "Four providers, four keys: requiring all of them would make every deployment configure vendors it does not use, and a required key with no default is how a boot is made to fail. A provider whose key (and, where there is no safe default, model) is absent is simply not configured; using it throws an LlmException that names the exact variables. Keys have NO default and are written as a commented line by `plugins enable`.",
+    "//no-routes": "A route that accepted a prompt would be an unauthenticated way to spend money and an open door to whatever tools are registered. The capability is a service; the application decides who may call it.",
+    "//no-jobs-no-listeners": "Nothing here is queued and nothing subscribes to an event, so there is no job registry entry to forget and no listener scope to get wrong. A consumer that runs a completion in a worker registers its OWN job.",
+    "commands": [
+        "Plugins\\Llm\\Infrastructure\\Cli\\ProvidersCommand"
+    ],
+    "config": [
+        {
+            "key": "LLM_DEFAULT_PROVIDER",
+            "type": "string",
+            "required": false,
+            "default": "anthropic"
+        },
+        {
+            "key": "LLM_TIMEOUT",
+            "type": "int",
+            "required": false,
+            "default": 60
+        },
+        {
+            "key": "LLM_DEFAULT_MAX_TOKENS",
+            "type": "int",
+            "required": false,
+            "default": 4096
+        },
+        {
+            "key": "LLM_MAX_RESPONSE_BYTES",
+            "type": "int",
+            "required": false,
+            "default": 8388608
+        },
+        {
+            "key": "LLM_BLOCK_PRIVATE",
+            "type": "bool",
+            "required": false,
+            "default": true
+        },
+        {
+            "key": "LLM_ANTHROPIC_API_KEY",
+            "type": "string",
+            "required": false
+        },
+        {
+            "key": "LLM_ANTHROPIC_MODEL",
+            "type": "string",
+            "required": false,
+            "default": "claude-sonnet-5-5"
+        },
+        {
+            "key": "LLM_ANTHROPIC_BASE_URL",
+            "type": "string",
+            "required": false,
+            "default": "https://api.anthropic.com"
+        },
+        {
+            "key": "LLM_ANTHROPIC_NATIVE_SCHEMA",
+            "type": "bool",
+            "required": false,
+            "default": true
+        },
+        {
+            "key": "LLM_OPENAI_API_KEY",
+            "type": "string",
+            "required": false
+        },
+        {
+            "key": "LLM_OPENAI_MODEL",
+            "type": "string",
+            "required": false
+        },
+        {
+            "key": "LLM_OPENAI_BASE_URL",
+            "type": "string",
+            "required": false,
+            "default": "https://api.openai.com"
+        },
+        {
+            "key": "LLM_OPENAI_NATIVE_SCHEMA",
+            "type": "bool",
+            "required": false,
+            "default": true
+        },
+        {
+            "key": "LLM_GEMINI_API_KEY",
+            "type": "string",
+            "required": false
+        },
+        {
+            "key": "LLM_GEMINI_MODEL",
+            "type": "string",
+            "required": false
+        },
+        {
+            "key": "LLM_GEMINI_BASE_URL",
+            "type": "string",
+            "required": false,
+            "default": "https://generativelanguage.googleapis.com"
+        },
+        {
+            "key": "LLM_GEMINI_NATIVE_SCHEMA",
+            "type": "bool",
+            "required": false,
+            "default": true
+        },
+        {
+            "key": "LLM_OLLAMA_MODEL",
+            "type": "string",
+            "required": false
+        },
+        {
+            "key": "LLM_OLLAMA_BASE_URL",
+            "type": "string",
+            "required": false,
+            "default": "http://127.0.0.1:11434"
+        },
+        {
+            "key": "LLM_OLLAMA_NATIVE_SCHEMA",
+            "type": "bool",
+            "required": false,
+            "default": true
+        },
+        {
+            "key": "LLM_OLLAMA_BLOCK_PRIVATE",
+            "type": "bool",
+            "required": false,
+            "default": false
+        }
+    ]
+}

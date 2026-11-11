@@ -1,0 +1,1 @@
+{"model":"llama-test","message":{"role":"assistant","content":"","tool_calls":[{"function":{"name":"get_invoice","arguments":{"id":"inv-7"}}},{"function":{"name":"ping","arguments":{}}}]},"done":true,"done_reason":"stop","prompt_eval_count":25,"eval_count":11}
